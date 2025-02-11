@@ -8,15 +8,15 @@
 </head>
 <body>
     <!-- Navigation bar -->
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light pt-4 pb-4">
         <div class="container-fluid">
             <div class="navbar-header">
-                  <a class="navbar-brand" href="#">Online Course</a>
+                  <a class="navbar-brand font-weight-bold" href="#">Online Courses</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 {% if user.is_authenticated %}
                 <li>
-                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <div class="btn btn-light">User: {{ user.first_name }}{{ user.username }}</div>
                     <a class="btn btn-link" href="{% url 'onlinecourse:logout' %}">Logout</a>
                 </li>
                 {% else %}
@@ -24,8 +24,14 @@
                     <form class="form-inline" action="{% url 'onlinecourse:login' %}" method="post">
                         {% csrf_token %}
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Username" name="username" >
-                            <input type="password" class="form-control" placeholder="Username" name="psw" >
+                            <label class="mr-3">
+                                Username:
+                                <input type="text" class="form-control ml-2" placeholder="Username" name="username" >
+                            </label>
+                            <label class="mr-2">
+                                Password:
+                                <input type="password" class="form-control ml-2" placeholder="Password" name="psw" >
+                            </label>
                             <button class="btn btn-primary" type="submit">Login</button>
                             <a class="btn btn-link" href="{% url 'onlinecourse:registration' %}">Sign Up</a>
                         </div>
@@ -38,16 +44,17 @@
 
     <!-- Page content -->
     {% if course_list %}
-        <div class="container">
-            <div class="card-deck">
+        <div class="m-5">
+            <div class="row gx-4 gx-lg-5">
                 {% for course in course_list %}
-                         <div class="card" style="width: 36rem;">
-                          <img class="card-img-left" src="{{MEDIA_URL}}/{{ course.image }}" width="240px" height="240px"
+                    <div class="col-md-4 mb-5">
+                         <div class="card h-100 text-center d-flex flex-column" style="align-items: center">
+                          <img class="card-img-center" src="{{MEDIA_URL}}/{{ course.image }}" width="240px" height="240px"
                                alt="Course image">
-                          <div class="card-body bg-light">
-                              <h5 class="card-title">{{ course.name }}, <span class="text-success">
-                                  {{ course.total_enrollment}} enrolled</span></h5>
-                            <p class="card-text">{{ course.description}}</p>
+                          <div class="card-body bg-light d-flex flex-column flex-grow-1" style="width: 100%">
+                              <h5 class="card-title mb-2">{{ course.name }}</h5>
+                              <h5 class="text-success mb-3">{{ course.total_enrollment}} enrolled</h5>
+                            <p class="card-text flex-grow-1 mb-4">{{ course.description}}</p>
                             <form action="{% url 'onlinecourse:enroll' course.id %}" method="post">
                                   {% csrf_token %}
                                   <input class="btn btn-primary"  type="submit"
@@ -55,6 +62,7 @@
                             </form>
                           </div>
                         </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
