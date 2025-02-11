@@ -121,8 +121,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+
+# Static Files
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(STATIC_ROOT, 'media')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # This is for development (Django will look here for static files)
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is where `collectstatic` will copy files in production
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Store uploaded media separately from static files
+
 

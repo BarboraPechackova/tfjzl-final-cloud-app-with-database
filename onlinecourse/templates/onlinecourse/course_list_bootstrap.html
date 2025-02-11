@@ -11,8 +11,7 @@
             margin: 0;
             padding: 0;
         }
-</style>
-
+    </style>
     <meta charset="UTF-8">
     <title>Online Courses</title>
 </head>
@@ -59,7 +58,7 @@
                 {% for course in course_list %}
                     <div class="col-md-3 mb-5">
                          <div class="card h-100 text-center d-flex flex-column" style="align-items: center">
-                          <img class="card-img-center img-fluid" src="{{MEDIA_URL}}/{{ course.image }}" width="240px" height="240px"
+                          <img class="card-img-center img-fluid" src="../static/media/{{ course.image }}" width="240px" height="240px"
                                alt="Course image">
                           <div class="card-body bg-light d-flex flex-column flex-grow-1" style="width: 100%">
                               <h5 class="card-title mb-2">{{ course.name }}</h5>
