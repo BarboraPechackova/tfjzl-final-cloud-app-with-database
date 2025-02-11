@@ -3,6 +3,16 @@
 <head>
     {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url("{% static 'onlinecourse/background.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+</style>
+
     <meta charset="UTF-8">
     <title>Online Courses</title>
 </head>
@@ -47,9 +57,9 @@
         <div class="m-5">
             <div class="row gx-4 gx-lg-5">
                 {% for course in course_list %}
-                    <div class="col-md-4 mb-5">
+                    <div class="col-md-3 mb-5">
                          <div class="card h-100 text-center d-flex flex-column" style="align-items: center">
-                          <img class="card-img-center" src="{{MEDIA_URL}}/{{ course.image }}" width="240px" height="240px"
+                          <img class="card-img-center img-fluid" src="{{MEDIA_URL}}/{{ course.image }}" width="240px" height="240px"
                                alt="Course image">
                           <div class="card-body bg-light d-flex flex-column flex-grow-1" style="width: 100%">
                               <h5 class="card-title mb-2">{{ course.name }}</h5>
@@ -58,7 +68,7 @@
                             <form action="{% url 'onlinecourse:enroll' course.id %}" method="post">
                                   {% csrf_token %}
                                   <input class="btn btn-primary"  type="submit"
-                                         value="{% if course.is_enrolled %}Enter{% else %}Enroll{% endif %} ">
+                                         value="{% if course.is_enrolled %}Enter{% else %}Enroll{% endif %}">
                             </form>
                           </div>
                         </div>
